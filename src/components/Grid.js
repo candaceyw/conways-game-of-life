@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import produce from "immer";
 
 const numRows = 50;
 const numCols = 50;
@@ -23,10 +24,13 @@ const Grid = () => {
                     <div 
                     key={`${i}-${k}`}
                     onClick={() => {
-                        
+                        const newGrid = produce(grid, gridCopy => {
+                            gridCopy[i][k] = grid[i][k] ? 0: 1;
+                        })
+                        setGrid(newGrid)
                     }}
                         style={{ width: 20, 
-                        height: 20, backgroundColor: grid[i][k] ? 'pink' : undefined,
+                        height: 20, backgroundColor: grid[i][k] ? 'coral' : undefined,
                         border: 'solid 1px black'
                         }}
                     />
