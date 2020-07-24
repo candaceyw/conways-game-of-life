@@ -65,6 +65,11 @@ const Grid = () => {
     setTimeout(runSimulation, 100);
   }, []);
 
+const randColor1 = Math.floor(Math.random() * Math.floor(255))
+const randColor2 = Math.floor(Math.random() * Math.floor(255))
+const randColor3 = Math.floor(Math.random() * Math.floor(255))
+
+
   return (
     <>
       <button
@@ -118,7 +123,7 @@ const Grid = () => {
               style={{
                 width: 20,
                 height: 20,
-                backgroundColor: grid[i][k] ? "blue" : undefined,
+                backgroundColor: grid[i][k] ? `rgb(${randColor1}, ${randColor2}, ${randColor3})` : undefined,
                 border: "solid 1px black"
               }}
             />
