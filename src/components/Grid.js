@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import produce from 'immer';
 import { gliderGun, gliderArray, oscillators, spaceships } from './Presets';
-import ReactGA from 'react-ga';
 
 const numRows = 50;
 const numCols = 50;
@@ -27,22 +26,18 @@ const generateEmptyGrid = () => {
 };
 
 const Grid = () => {
-	const [config, setConfig] = useState({
-		gridCols: 42,
-		gridRows: 42,
-		speed: 200,
-	});
-	const [evolutionInterval, setEvolutionInterval] = useState(null);
-	const [genCount, setGenCount] = useState(0);
-
 	const [grid, setGrid] = useState(() => {
 		return generateEmptyGrid();
 	});
+	const [generation, setGeneration] = useState(0);
 
 	const [running, setRunning] = useState(false);
 
 	const runningRef = useRef(running);
 	runningRef.current = running;
+
+	const generationRef = useRef(generation);
+	generationRef.current = generation;
 
 	const runSimulation = useCallback(() => {
 		if (!runningRef.current) {
@@ -71,45 +66,13 @@ const Grid = () => {
 				}
 			});
 		});
-
+		setGeneration(++generationRef.current);
 		setTimeout(runSimulation, 100);
 	}, []);
 
 	const randColor1 = Math.floor(Math.random() * Math.floor(255));
 	const randColor2 = Math.floor(Math.random() * Math.floor(255));
 	const randColor3 = Math.floor(Math.random() * Math.floor(255));
-
-	const playPause = () => {
-		setEvolutionInterval((prev) => {
-			return prev == null ? config.speed : null;
-		});
-		ReactGA.event({
-			category: 'User',
-			action: 'Play/paused simulation',
-		});
-	};
-
-	const loadPreset = (Presets) => {
-		if (
-			!(
-				Presets.length <= config.gridRows &&
-				Presets[0].length <= config.gridCols
-			)
-		) {
-			console.error('Grid preset too large for current grid');
-		} else {
-			setEvolutionInterval(null);
-			// have to wait for the last interval to finish
-			setTimeout(() => {
-				setGenCount(0);
-				setGrid(Presets.map((row) => [...row]));
-			}, config.speed);
-		}
-		ReactGA.event({
-			category: 'User',
-			action: 'Loaded preset',
-		});
-	};
 
 	return (
 		<>
@@ -145,15 +108,6 @@ const Grid = () => {
 			>
 				clear
 			</button>
-
-			<button
-				onClick={() => {
-					loadPreset(spaceships);
-				}}
-			>
-				Load Spaceships
-			</button>
-
 			<div
 				style={{
 					display: 'grid',
@@ -182,6 +136,7 @@ const Grid = () => {
 					))
 				)}
 			</div>
+			<h2>Generations: {generation}</h2>
 		</>
 	);
 };
