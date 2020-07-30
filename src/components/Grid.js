@@ -4,6 +4,7 @@ import { gliderGun, gliderArray, oscillators, spaceships } from './Presets';
 
 const numRows = 50;
 const numCols = 50;
+const speed = 100;
 
 const operations = [
 	[0, 1],
@@ -26,12 +27,11 @@ const generateEmptyGrid = () => {
 };
 
 const Grid = () => {
+	const [generation, setGeneration] = useState(0);
+	const [running, setRunning] = useState(false);
 	const [grid, setGrid] = useState(() => {
 		return generateEmptyGrid();
 	});
-	const [generation, setGeneration] = useState(0);
-
-	const [running, setRunning] = useState(false);
 
 	const runningRef = useRef(running);
 	runningRef.current = running;
