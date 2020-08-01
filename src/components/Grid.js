@@ -1,10 +1,13 @@
 import React, { useState, useCallback, useRef } from 'react';
 import produce from 'immer';
-import { gliderGun, gliderArray, oscillators, spaceships } from './Presets';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
 
-const numRows = 50;
-const numCols = 50;
-const speed = 100;
+import { GridSize, numRows, numCols } from './GridSize';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+let speed = 500;
 
 const operations = [
 	[0, 1],
@@ -67,16 +70,21 @@ const Grid = () => {
 			});
 		});
 		setGeneration(++generationRef.current);
-		setTimeout(runSimulation, 100);
+		setTimeout(runSimulation, speed);
 	}, []);
 
+	const handleSelect = (e) => {
+		GridSize(e);
+	};
+
+	// random color generation
 	const randColor1 = Math.floor(Math.random() * Math.floor(255));
 	const randColor2 = Math.floor(Math.random() * Math.floor(255));
 	const randColor3 = Math.floor(Math.random() * Math.floor(255));
 
 	return (
 		<>
-			<button
+			<Button
 				onClick={() => {
 					setRunning(!running);
 					if (!running) {
@@ -86,8 +94,22 @@ const Grid = () => {
 				}}
 			>
 				{running ? 'stop' : 'start'}
-			</button>
-			<button
+			</Button>
+			<Button
+				onClick={() => {
+					speed = 1000;
+				}}
+			>
+				Slower
+			</Button>
+			<Button
+				onClick={() => {
+					speed = 100;
+				}}
+			>
+				Faster
+			</Button>
+			<Button
 				onClick={() => {
 					const rows = [];
 					for (let i = 0; i < numRows; i++) {
@@ -100,14 +122,29 @@ const Grid = () => {
 				}}
 			>
 				random
-			</button>
-			<button
+			</Button>
+			<Button
 				onClick={() => {
 					setGrid(generateEmptyGrid());
 				}}
 			>
 				clear
-			</button>
+			</Button>
+
+			<Dropdown title='Grid Size' id='size-menu' onSelect={handleSelect}>
+				<Dropdown.Toggle variant='success' id='dropdown-basic'>
+					Grid Size
+				</Dropdown.Toggle>
+				<Dropdown.Menu>
+					<Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
+					<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
+					<Dropdown.Item eventKey='3'>70x50</Dropdown.Item>
+				</Dropdown.Menu>
+				{/* <Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
+				<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
+				<Dropdown.Item eventKey='3'>70x50</Dropdown.Item> */}
+			</Dropdown>
+
 			<div
 				style={{
 					display: 'grid',
