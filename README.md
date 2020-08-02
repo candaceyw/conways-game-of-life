@@ -1,8 +1,8 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c59d7469-fad0-46fb-8def-11ddc0a5dc38/deploy-status)](https://app.netlify.com/sites/sharp-bassi-d19239/deploys)
 
-### Conways Game of Life
+# Conways Game of Life
 
-# cellular automaton
+## Cellular Automaton
 
 ##### About the Game
 
