@@ -4,7 +4,7 @@
 
 ## Cellular Automaton
 
-##### About the Game
+##### ABOUT THE GAME
 
 ```
 
@@ -59,3 +59,5 @@ to create further generations.
     7. User can clear the grid board
 
 ```
+
+### <a href="https://5f2603732008120007035113--sharp-bassi-d19239.netlify.app/">VIEW GAME </a>
