@@ -86,11 +86,11 @@ const Grid = () => {
 		<div className='gameBoard'>
 			<div className='howToPlay'>
 				<p>
-					Choose a grid size, then click either Random to set the seed, or
+					1. Choose a grid size 2. Click either RANDOM to set the seed, or
 					create your own by clicking directly onto the grid.
 					<br />
-					Press Play to watch the generations change. You can speed up or slow
-					down the generations.
+					3. Press START to watch the generations change. 4. You can speed up or
+					slow down the generations.
 				</p>
 			</div>
 			<div className='btn'>
