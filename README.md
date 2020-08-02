@@ -60,4 +60,4 @@ to create further generations.
 
 ```
 
-### <a href="https://5f2603732008120007035113--sharp-bassi-d19239.netlify.app/">VIEW GAME </a>
+### <a href="https://sharp-bassi-d19239.netlify.app/">VIEW GAME </a>
