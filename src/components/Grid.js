@@ -30,6 +30,7 @@ const generateEmptyGrid = () => {
 };
 
 const Grid = () => {
+	const [eventKey, setEventkey] = useState(0);
 	const [generation, setGeneration] = useState(0);
 	const [running, setRunning] = useState(false);
 	const [grid, setGrid] = useState(() => {
@@ -74,7 +75,9 @@ const Grid = () => {
 	}, []);
 
 	const handleSelect = (e) => {
+		console.log(e);
 		GridSize(e);
+		setEventkey(e);
 	};
 
 	// random color generation
@@ -84,6 +87,7 @@ const Grid = () => {
 
 	return (
 		<div className='gameBoard'>
+			{/* Game instructions  */}
 			<div className='howToPlay'>
 				<p>
 					1. Choose a grid size 2. Click either RANDOM to set the seed, or
@@ -93,6 +97,8 @@ const Grid = () => {
 					slow down the generations.
 				</p>
 			</div>
+
+			{/* Start Buttons */}
 			<div className='btn'>
 				<Dropdown title='Grid Size' id='size-menu' onSelect={handleSelect}>
 					<Dropdown.Toggle variant='success' id='dropdown-basic'>
@@ -103,9 +109,6 @@ const Grid = () => {
 						<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
 						<Dropdown.Item eventKey='3'>70x50</Dropdown.Item>
 					</Dropdown.Menu>
-					{/* <Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
-				<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
-				<Dropdown.Item eventKey='3'>70x50</Dropdown.Item> */}
 				</Dropdown>
 
 				<Button
@@ -158,6 +161,7 @@ const Grid = () => {
 				</Button>
 			</div>
 
+			{/* Start Grid */}
 			<div
 				className='gridDisplay'
 				style={{
