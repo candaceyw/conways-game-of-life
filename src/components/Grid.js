@@ -94,6 +94,20 @@ const Grid = () => {
 				</p>
 			</div>
 			<div className='btn'>
+				<Dropdown title='Grid Size' id='size-menu' onSelect={handleSelect}>
+					<Dropdown.Toggle variant='success' id='dropdown-basic'>
+						GRID SIZE
+					</Dropdown.Toggle>
+					<Dropdown.Menu>
+						<Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
+						<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
+						<Dropdown.Item eventKey='3'>70x50</Dropdown.Item>
+					</Dropdown.Menu>
+					{/* <Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
+				<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
+				<Dropdown.Item eventKey='3'>70x50</Dropdown.Item> */}
+				</Dropdown>
+
 				<Button
 					onClick={() => {
 						const rows = [];
@@ -142,20 +156,6 @@ const Grid = () => {
 				>
 					CLEAR
 				</Button>
-
-				<Dropdown title='Grid Size' id='size-menu' onSelect={handleSelect}>
-					<Dropdown.Toggle variant='success' id='dropdown-basic'>
-						GRID SIZE
-					</Dropdown.Toggle>
-					<Dropdown.Menu>
-						<Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
-						<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
-						<Dropdown.Item eventKey='3'>70x50</Dropdown.Item>
-					</Dropdown.Menu>
-					{/* <Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
-				<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
-				<Dropdown.Item eventKey='3'>70x50</Dropdown.Item> */}
-				</Dropdown>
 			</div>
 
 			<div
