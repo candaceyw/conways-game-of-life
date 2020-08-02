@@ -83,69 +83,83 @@ const Grid = () => {
 	const randColor3 = Math.floor(Math.random() * Math.floor(255));
 
 	return (
-		<>
-			<Button
-				onClick={() => {
-					setRunning(!running);
-					if (!running) {
-						runningRef.current = true;
-						runSimulation();
-					}
-				}}
-			>
-				{running ? 'stop' : 'start'}
-			</Button>
-			<Button
-				onClick={() => {
-					speed = 1000;
-				}}
-			>
-				Slower
-			</Button>
-			<Button
-				onClick={() => {
-					speed = 100;
-				}}
-			>
-				Faster
-			</Button>
-			<Button
-				onClick={() => {
-					const rows = [];
-					for (let i = 0; i < numRows; i++) {
-						rows.push(
-							Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
-						);
-					}
+		<div className='gameBoard'>
+			<div className='howToPlay'>
+				<p>
+					Choose a grid size, then click either Random to set the seed, or
+					create your own by clicking directly onto the grid.
+					<br />
+					Press Play to watch the generations change. You can speed up or slow
+					down the generations.
+				</p>
+			</div>
+			<div className='btn'>
+				<Button
+					onClick={() => {
+						const rows = [];
+						for (let i = 0; i < numRows; i++) {
+							rows.push(
+								Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
+							);
+						}
 
-					setGrid(rows);
-				}}
-			>
-				random
-			</Button>
-			<Button
-				onClick={() => {
-					setGrid(generateEmptyGrid());
-				}}
-			>
-				clear
-			</Button>
+						setGrid(rows);
+					}}
+				>
+					RANDOM
+				</Button>
 
-			<Dropdown title='Grid Size' id='size-menu' onSelect={handleSelect}>
-				<Dropdown.Toggle variant='success' id='dropdown-basic'>
-					Grid Size
-				</Dropdown.Toggle>
-				<Dropdown.Menu>
-					<Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
-					<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
-					<Dropdown.Item eventKey='3'>70x50</Dropdown.Item>
-				</Dropdown.Menu>
-				{/* <Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
+				<Button
+					onClick={() => {
+						setRunning(!running);
+						if (!running) {
+							runningRef.current = true;
+							runSimulation();
+						}
+					}}
+				>
+					{running ? 'STOP' : 'START'}
+				</Button>
+				<Button
+					onClick={() => {
+						speed = 1000;
+					}}
+				>
+					SLOWER
+				</Button>
+				<Button
+					onClick={() => {
+						speed = 100;
+					}}
+				>
+					FASTER
+				</Button>
+
+				<Button
+					onClick={() => {
+						setGrid(generateEmptyGrid());
+					}}
+				>
+					CLEAR
+				</Button>
+
+				<Dropdown title='Grid Size' id='size-menu' onSelect={handleSelect}>
+					<Dropdown.Toggle variant='success' id='dropdown-basic'>
+						GRID SIZE
+					</Dropdown.Toggle>
+					<Dropdown.Menu>
+						<Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
+						<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
+						<Dropdown.Item eventKey='3'>70x50</Dropdown.Item>
+					</Dropdown.Menu>
+					{/* <Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
 				<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
 				<Dropdown.Item eventKey='3'>70x50</Dropdown.Item> */}
-			</Dropdown>
+				</Dropdown>
+			</div>
 
 			<div
+				className='gridDisplay'
 				style={{
 					display: 'grid',
 					gridTemplateColumns: `repeat(${numCols}, 20px)`,
@@ -167,14 +181,14 @@ const Grid = () => {
 								backgroundColor: grid[i][k]
 									? `rgb(${randColor1}, ${randColor2}, ${randColor3})`
 									: undefined,
-								border: 'solid 1px black',
+								border: 'solid 1px #273746',
 							}}
 						/>
 					))
 				)}
 			</div>
 			<h2>Generations: {generation}</h2>
-		</>
+		</div>
 	);
 };
 

@@ -52,3 +52,41 @@ h4 {
 h4 {
 	margin-top: 0px;
 }
+p {
+	color: white;
+}
+
+.rules {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.btn {
+	margin: 2%;
+	width: 100%;
+}
+button.btn.btn-primary {
+	width: 200px;
+}
+
+.dropdown {
+	width: 100%;
+}
+
+.dropdown-toggle.btn.btn-success {
+	width: 200px;
+}
+
+.gridDisplay {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	/* margin-left: 5%; */
+}
+
+.howToPlay {
+	text-align: center;
+	margin: 10px 150px 10px 150px;
+}
