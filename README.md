@@ -46,3 +46,16 @@ to create further generations.
 
 
 ```
+
+##### FEATURES
+
+```
+    1. Colors randomizes as generation increases.
+    2. User can change grid size
+    3. User can select speed
+    4. Random generation can be set
+    5. User can select cells to create a starting point
+    6. User can start and stop generations
+    7. User can clear the grid board
+
+```
