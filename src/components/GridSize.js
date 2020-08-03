@@ -9,12 +9,12 @@ export const GridSize = (size) => {
 
       break;
     case '2':
-      numRows = 50;
+      numRows = 20;
       numCols = 50;
 
       break;
     case '3':
-      numRows = 80;
+      numRows = 30;
       numCols = 80;
       break;
     case '4':
