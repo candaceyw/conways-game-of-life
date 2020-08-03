@@ -30,7 +30,7 @@ const generateEmptyGrid = () => {
 };
 
 const Grid = () => {
-	const [eventKey, setEventkey] = useState(0);
+	const [eventKey, setEventkey] = useState(1);
 	const [generation, setGeneration] = useState(0);
 	const [running, setRunning] = useState(false);
 	const [grid, setGrid] = useState(() => {
@@ -75,9 +75,8 @@ const Grid = () => {
 	}, []);
 
 	const handleSelect = (e) => {
-		console.log(e);
-		GridSize(e);
 		setEventkey(e);
+		GridSize(e);
 	};
 
 	// random color generation
@@ -105,9 +104,10 @@ const Grid = () => {
 						GRID SIZE
 					</Dropdown.Toggle>
 					<Dropdown.Menu>
-						<Dropdown.Item eventKey='1'>50x10</Dropdown.Item>
-						<Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
-						<Dropdown.Item eventKey='3'>70x50</Dropdown.Item>
+						<Dropdown.Item eventKey='1'>Small</Dropdown.Item>
+						<Dropdown.Item eventKey='2'>Medium</Dropdown.Item>
+						<Dropdown.Item eventKey='3'>Large</Dropdown.Item>
+						<Dropdown.Item eventKey='4'>Default</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>
 

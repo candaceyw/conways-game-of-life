@@ -4,8 +4,8 @@ const GameRules = () => {
 	return (
 		<div className='rules'>
 			<h1>Rules</h1>
-			<p>
-				Rules of the game include...
+			<div>
+				<p>Rules of the game include...</p>
 				<ol>
 					<li>
 						Any live cell with fewer than two live neighbours dies (referred to
@@ -23,7 +23,7 @@ const GameRules = () => {
 						Any dead cell with exactly three live neighbours will come to life.
 					</li>
 				</ol>
-			</p>
+			</div>
 		</div>
 	);
 };
