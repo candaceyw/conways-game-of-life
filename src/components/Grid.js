@@ -82,7 +82,7 @@ const Grid = () => {
 			GridSize(e);
 			setGrid(generateEmptyGrid(e));
 		} else {
-			alert('must click STOP before changing grid size');
+			alert('Must click STOP before changing grid size');
 		}
 	};
 
@@ -165,7 +165,7 @@ const Grid = () => {
 							setGrid(generateEmptyGrid());
 							setGeneration(0);
 						} else {
-							alert('must click stop before clearing');
+							alert('Must click STOP before clearing');
 						}
 					}}
 				>
