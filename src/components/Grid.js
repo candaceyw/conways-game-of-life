@@ -178,10 +178,12 @@ const Grid = () => {
 						<div
 							key={`${i}-${k}`}
 							onClick={() => {
-								const newGrid = produce(grid, (gridCopy) => {
-									gridCopy[i][k] = grid[i][k] ? 0 : 1;
-								});
-								setGrid(newGrid);
+								if (!running) {
+									const newGrid = produce(grid, (gridCopy) => {
+										gridCopy[i][k] = grid[i][k] ? 0 : 1;
+									});
+									setGrid(newGrid);
+								}
 							}}
 							style={{
 								width: 20,
