@@ -60,4 +60,13 @@ to create further generations.
 
 ```
 
+##### USING THE CODE
+
+```
+   React App
+   Install dependencies: npm install
+   Run locally: npm start
+
+```
+
 ### <a href="https://sharp-bassi-d19239.netlify.app/">VIEW GAME </a>

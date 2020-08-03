@@ -10,190 +10,193 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 let speed = 500;
 
 const operations = [
-	[0, 1],
-	[0, -1],
-	[1, -1],
-	[-1, 1],
-	[1, 1],
-	[-1, -1],
-	[1, 0],
-	[-1, 0],
+  [0, 1],
+  [0, -1],
+  [1, -1],
+  [-1, 1],
+  [1, 1],
+  [-1, -1],
+  [1, 0],
+  [-1, 0],
 ];
 
 const generateEmptyGrid = () => {
-	const rows = [];
-	for (let i = 0; i < numRows; i++) {
-		rows.push(Array.from(Array(numCols), () => 0));
-	}
+  const rows = [];
+  for (let i = 0; i < numRows; i++) {
+    rows.push(Array.from(Array(numCols), () => 0));
+  }
 
-	return rows;
+  return rows;
 };
 
 const Grid = () => {
-	const [eventKey, setEventkey] = useState(1);
-	const [generation, setGeneration] = useState(0);
-	const [running, setRunning] = useState(false);
-	const [grid, setGrid] = useState(() => {
-		return generateEmptyGrid();
-	});
+  const [eventKey, setEventkey] = useState();
+  const [generation, setGeneration] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [grid, setGrid] = useState(() => {
+    return generateEmptyGrid();
+  });
 
-	const runningRef = useRef(running);
-	runningRef.current = running;
+  console.log('eventkey', eventKey);
 
-	const generationRef = useRef(generation);
-	generationRef.current = generation;
+  const runningRef = useRef(running);
+  runningRef.current = running;
 
-	const runSimulation = useCallback(() => {
-		if (!runningRef.current) {
-			return;
-		}
+  const generationRef = useRef(generation);
+  generationRef.current = generation;
 
-		setGrid((g) => {
-			return produce(g, (gridCopy) => {
-				for (let i = 0; i < numRows; i++) {
-					for (let k = 0; k < numCols; k++) {
-						let neighbors = 0;
-						operations.forEach(([x, y]) => {
-							const newI = i + x;
-							const newK = k + y;
-							if (newI >= 0 && newI < numRows && newK >= 0 && newK < numCols) {
-								neighbors += g[newI][newK];
-							}
-						});
+  const runSimulation = useCallback(() => {
+    if (!runningRef.current) {
+      return;
+    }
 
-						if (neighbors < 2 || neighbors > 3) {
-							gridCopy[i][k] = 0;
-						} else if (g[i][k] === 0 && neighbors === 3) {
-							gridCopy[i][k] = 1;
-						}
-					}
-				}
-			});
-		});
-		setGeneration(++generationRef.current);
-		setTimeout(runSimulation, speed);
-	}, []);
+    setGrid((g) => {
+      return produce(g, (gridCopy) => {
+        for (let i = 0; i < numRows; i++) {
+          for (let k = 0; k < numCols; k++) {
+            let neighbors = 0;
+            operations.forEach(([x, y]) => {
+              const newI = i + x;
+              const newK = k + y;
+              if (newI >= 0 && newI < numRows && newK >= 0 && newK < numCols) {
+                neighbors += g[newI][newK];
+              }
+            });
 
-	const handleSelect = (e) => {
-		setEventkey(e);
-		GridSize(e);
-	};
+            if (neighbors < 2 || neighbors > 3) {
+              gridCopy[i][k] = 0;
+            } else if (g[i][k] === 0 && neighbors === 3) {
+              gridCopy[i][k] = 1;
+            }
+          }
+        }
+      });
+    });
+    setGeneration(++generationRef.current);
+    setTimeout(runSimulation, speed);
+  }, []);
 
-	// random color generation
-	const randColor1 = Math.floor(Math.random() * Math.floor(255));
-	const randColor2 = Math.floor(Math.random() * Math.floor(255));
-	const randColor3 = Math.floor(Math.random() * Math.floor(255));
+  const handleSelect = (e) => {
+    setEventkey(e);
+    GridSize(e);
+    setGrid(generateEmptyGrid(e));
+  };
 
-	return (
-		<div className='gameBoard'>
-			{/* Game instructions  */}
-			<div className='howToPlay'>
-				<p>
-					1. Choose a grid size 2. Click either RANDOM to set the seed, or
-					create your own by clicking directly onto the grid.
-					<br />
-					3. Press START to watch the generations change. 4. You can speed up or
-					slow down the generations.
-				</p>
-			</div>
+  // random color generation
+  const randColor1 = Math.floor(Math.random() * Math.floor(255));
+  const randColor2 = Math.floor(Math.random() * Math.floor(255));
+  const randColor3 = Math.floor(Math.random() * Math.floor(255));
 
-			{/* Start Buttons */}
-			<div className='btn'>
-				<Dropdown title='Grid Size' id='size-menu' onSelect={handleSelect}>
-					<Dropdown.Toggle variant='success' id='dropdown-basic'>
-						GRID SIZE
-					</Dropdown.Toggle>
-					<Dropdown.Menu>
-						<Dropdown.Item eventKey='1'>Small</Dropdown.Item>
-						<Dropdown.Item eventKey='2'>Medium</Dropdown.Item>
-						<Dropdown.Item eventKey='3'>Large</Dropdown.Item>
-						<Dropdown.Item eventKey='4'>Default</Dropdown.Item>
-					</Dropdown.Menu>
-				</Dropdown>
+  return (
+    <div className='gameBoard'>
+      {/* Game instructions  */}
+      <div className='howToPlay'>
+        <p>
+          1. Choose a grid size 2. Click either RANDOM to set the seed, or
+          create your own by clicking directly onto the grid.
+          <br />
+          3. Press START to watch the generations change. 4. You can speed up or
+          slow down the generations.
+        </p>
+      </div>
 
-				<Button
-					onClick={() => {
-						const rows = [];
-						for (let i = 0; i < numRows; i++) {
-							rows.push(
-								Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
-							);
-						}
+      {/* Start Buttons */}
+      <div className='btn'>
+        <Dropdown title='Grid Size' id='size-menu' onSelect={handleSelect}>
+          <Dropdown.Toggle variant='success' id='dropdown-basic'>
+            GRID SIZE
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item eventKey='1'>Small</Dropdown.Item>
+            <Dropdown.Item eventKey='2'>Medium</Dropdown.Item>
+            <Dropdown.Item eventKey='3'>Large</Dropdown.Item>
+            <Dropdown.Item eventKey='4'>Default</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
 
-						setGrid(rows);
-					}}
-				>
-					RANDOM
-				</Button>
+        <Button
+          onClick={() => {
+            const rows = [];
+            for (let i = 0; i < numRows; i++) {
+              rows.push(
+                Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
+              );
+            }
 
-				<Button
-					onClick={() => {
-						setRunning(!running);
-						if (!running) {
-							runningRef.current = true;
-							runSimulation();
-						}
-					}}
-				>
-					{running ? 'STOP' : 'START'}
-				</Button>
-				<Button
-					onClick={() => {
-						speed = 1000;
-					}}
-				>
-					SLOWER
-				</Button>
-				<Button
-					onClick={() => {
-						speed = 100;
-					}}
-				>
-					FASTER
-				</Button>
+            setGrid(rows);
+          }}
+        >
+          RANDOM
+        </Button>
 
-				<Button
-					onClick={() => {
-						setGrid(generateEmptyGrid());
-					}}
-				>
-					CLEAR
-				</Button>
-			</div>
+        <Button
+          onClick={() => {
+            setRunning(!running);
+            if (!running) {
+              runningRef.current = true;
+              runSimulation();
+            }
+          }}
+        >
+          {running ? 'STOP' : 'START'}
+        </Button>
+        <Button
+          onClick={() => {
+            speed = 1000;
+          }}
+        >
+          SLOWER
+        </Button>
+        <Button
+          onClick={() => {
+            speed = 100;
+          }}
+        >
+          FASTER
+        </Button>
 
-			{/* Start Grid */}
-			<div
-				className='gridDisplay'
-				style={{
-					display: 'grid',
-					gridTemplateColumns: `repeat(${numCols}, 20px)`,
-				}}
-			>
-				{grid.map((rows, i) =>
-					rows.map((col, k) => (
-						<div
-							key={`${i}-${k}`}
-							onClick={() => {
-								const newGrid = produce(grid, (gridCopy) => {
-									gridCopy[i][k] = grid[i][k] ? 0 : 1;
-								});
-								setGrid(newGrid);
-							}}
-							style={{
-								width: 20,
-								height: 20,
-								backgroundColor: grid[i][k]
-									? `rgb(${randColor1}, ${randColor2}, ${randColor3})`
-									: undefined,
-								border: 'solid 1px #273746',
-							}}
-						/>
-					))
-				)}
-			</div>
-			<h2>Generations: {generation}</h2>
-		</div>
-	);
+        <Button
+          onClick={() => {
+            setGrid(generateEmptyGrid());
+          }}
+        >
+          CLEAR
+        </Button>
+      </div>
+
+      {/* Start Grid */}
+      <div
+        className='gridDisplay'
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `repeat(${numCols}, 20px)`,
+        }}
+      >
+        {grid.map((rows, i) =>
+          rows.map((col, k) => (
+            <div
+              key={`${i}-${k}`}
+              onClick={() => {
+                const newGrid = produce(grid, (gridCopy) => {
+                  gridCopy[i][k] = grid[i][k] ? 0 : 1;
+                });
+                setGrid(newGrid);
+              }}
+              style={{
+                width: 20,
+                height: 20,
+                backgroundColor: grid[i][k]
+                  ? `rgb(${randColor1}, ${randColor2}, ${randColor3})`
+                  : undefined,
+                border: 'solid 1px #273746',
+              }}
+            />
+          ))
+        )}
+      </div>
+      <h2>Generations: {generation}</h2>
+    </div>
+  );
 };
 
 export default Grid;
