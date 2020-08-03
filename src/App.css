@@ -103,8 +103,9 @@ li {
 
 .examples {
   display: flex;
-  margin: 2% 20% 2% 20%;
+  justify-content: center;
   width: 100%;
+  margin-top: 30px;
 }
 .pattern {
   display: flex;
