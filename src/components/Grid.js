@@ -77,9 +77,13 @@ const Grid = () => {
 	}, []);
 
 	const handleSelect = (e) => {
-		setEventkey(e);
-		GridSize(e);
-		setGrid(generateEmptyGrid(e));
+		if (!running) {
+			setEventkey(e);
+			GridSize(e);
+			setGrid(generateEmptyGrid(e));
+		} else {
+			alert('must click STOP before changing grid size');
+		}
 	};
 
 	// random color generation
@@ -157,8 +161,12 @@ const Grid = () => {
 
 				<Button
 					onClick={() => {
-						setGrid(generateEmptyGrid());
-						setGeneration(0);
+						if (!running) {
+							setGrid(generateEmptyGrid());
+							setGeneration(0);
+						} else {
+							alert('must click stop before clearing');
+						}
 					}}
 				>
 					CLEAR
