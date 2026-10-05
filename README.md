@@ -1,72 +1,128 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c59d7469-fad0-46fb-8def-11ddc0a5dc38/deploy-status)](https://app.netlify.com/sites/sharp-bassi-d19239/deploys)
+# Conway's Game of Life
 
-# Conways Game of Life
+An interactive React implementation of Conway's Game of Life, the cellular automaton created by mathematician John Conway.
 
-## Cellular Automaton
+[View the live app](https://conways-game-of-life-iota-virid.vercel.app/)
 
-##### ABOUT THE GAME
+This project lets you build an initial pattern on a grid and watch it evolve generation by generation according to a small set of rules. It was originally created in 2020 and has since been updated so it can continue to build and deploy on a modern Node.js environment.
 
+## About the Game
+
+Conway's Game of Life is a zero-player simulation. After the initial configuration is created, each generation is determined entirely by the state of the previous generation.
+
+Each cell on the grid is either alive or dead and interacts with its eight neighboring cells.
+
+### Rules
+
+For every generation:
+
+1. A live cell with fewer than two live neighbors dies from underpopulation.
+2. A live cell with two or three live neighbors survives.
+3. A live cell with more than three live neighbors dies from overpopulation.
+4. A dead cell with exactly three live neighbors becomes alive.
+
+All cells are evaluated simultaneously to produce the next generation.
+
+## Features
+
+- Create a starting pattern by selecting cells on the grid
+- Start and stop the simulation
+- Clear the board and begin again
+- Generate a random starting population
+- Adjust the simulation speed
+- Change the grid size
+- Track the current generation
+- View examples of common Game of Life patterns
+- Dynamic cell colors as generations progress
+- Prevent grid editing while the simulation is running
+
+## Tech Stack
+
+- React 16
+- Create React App / react-scripts
+- JavaScript
+- CSS
+- Bootstrap 4
+- React Bootstrap
+- Immer
+- Node.js 24 for the current deployment environment
+- Vercel for deployment
+
+## Running Locally
+
+### Requirements
+
+- Node.js 24
+- npm
+
+### Install
+
+Clone the repository:
+
+```bash
+git clone https://github.com/candaceyw/conways-game-of-life.git
+cd conways-game-of-life
 ```
 
-Conway's Game of Life, also known as the Game of Life or simply Life,
-is a cellular automaton devised by the British mathematician
-John Horton Conway in 1970. It is the best-known example of a cellular automaton.
+Install the dependencies:
 
-The "game" is actually a zero-player game, meaning that its evolution
-is determined by its initial state, needing no input from human players.
-One interacts with the Game of Life by creating an initial
-configuration and observing how it evolves.
-
+```bash
+npm install
 ```
 
-##### RULES
+Start the development server:
 
-```
-The universe of the Game of Life is an infinite two-dimensional orthogonal grid
-of square cells, each of which is in one of two possible states, live or dead.
-Every cell interacts with its eight neighbours, which are the cells that are
-directly horizontally, vertically, or diagonally adjacent. At each step in time,
-the following transitions occur:
-
-    1. Any live cell with fewer than two live neighbours dies
-        (referred to as underpopulation or exposure).
-    2. Any live cell with more than three live neighbours dies
-        (referred to as overpopulation or overcrowding).
-    3. Any live cell with two or three live neighbours lives,
-        unchanged, to the next generation.
-    4. Any dead cell with exactly three live neighbours
-        will come to life.
-
-The initial pattern constitutes the 'seed' of the system. The first generation
-is created by applying the above rules simultaneously to every cell in the
-seed — births and deaths happen simultaneously, and the discrete moment at which
-this happens is sometimes called a tick. (In other words, each generation is a
-pure function of the one before.) The rules continue to be applied repeatedly
-to create further generations.
-
-
+```bash
+npm start
 ```
 
-##### FEATURES
+The application will be available locally at:
 
-```
-    1. Colors randomizes as generation increases.
-    2. User can change grid size
-    3. User can select speed
-    4. Random generation can be set
-    5. User can select cells to create a starting point
-    6. User can start and stop generations
-    7. User can clear the grid board
-
+```text
+http://localhost:3000
 ```
 
-##### USING THE CODE
+## Production Build
 
+Create an optimized production build with:
+
+```bash
+npm run build
 ```
-   React App
-   Install dependencies: npm install
-   Run locally: npm start
 
+The project uses an OpenSSL legacy compatibility option during the production build because the original Create React App / Webpack toolchain predates the OpenSSL version used by Node.js 24.
+
+## Deployment
+
+The application is deployed with Vercel:
+
+https://conways-game-of-life-iota-virid.vercel.app/
+
+The project is configured to use Node.js 24. Because the original application uses an older Create React App and Webpack toolchain, the production build includes a compatibility setting that allows it to build successfully on the current Node.js runtime.
+
+## Project Structure
+
+```text
+src/
+├── components/
+│   ├── GameRules.js
+│   ├── Grid.js
+│   ├── GridSize.js
+│   ├── Patterns.js
+│   └── Presets.js
+├── utils/
+├── App.js
+├── App.css
+├── index.js
+└── index.css
 ```
 
-### <a href="https://sharp-bassi-d19239.netlify.app/">VIEW GAME </a>
+## Background
+
+This project was originally built as a React implementation of Conway's Game of Life and demonstrates state-driven UI behavior, simulation logic, reusable React components, and interactive controls.
+
+For additional background on the simulation, see [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
+
+## License
+
+This project is licensed under the terms in the repository's LICENSE file.
